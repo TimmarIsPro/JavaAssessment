@@ -6,8 +6,9 @@
 package assessment2darray;
 
 
-public class Customer {
-   
+public class Customer implements Comparable {
+    
+        int id;
         String name;
         String age;
         String classType;
@@ -18,7 +19,8 @@ public class Customer {
         public Customer() {
             
         }
-        public Customer (String cName, String cAge, String cClassType, String cSeatType, int cSeatRow, int cSeatColumn ){
+        public Customer (int cId, String cName, String cAge, String cClassType, String cSeatType, int cSeatRow, int cSeatColumn ){
+            id = cId;
             name = cName;
             age = cAge;
             classType = cClassType;
@@ -26,7 +28,19 @@ public class Customer {
             seatRow = cSeatRow;
             seatColumn = cSeatColumn;
         }
-
+        
+        public int compareTo(Object o) {
+            Customer c = (Customer) o;
+            return this.name.compareTo(c.name);
+        }
+        
+        public int getId() {
+            return id;
+        }
+        public void setId(int id) {
+            this.id = id;
+        }
+        
     public String getName() {
         return name;
     }
@@ -75,7 +89,13 @@ public class Customer {
         this.seatColumn = seatColumn;
     }
 
-        
+        public String toString() {
+            String details = "";
+            
+            details = "Customer: " + name + " Age: " + age + " Class Type: " + classType + " Seat Type: " + seatType + " Seat Assigned: [" + seatRow + ", " + seatColumn + "]";
+            
+            return details;
+        }
         
       
 }
