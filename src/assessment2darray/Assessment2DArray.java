@@ -120,7 +120,6 @@ public class Assessment2DArray {
                             seatingPlan[i][1] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(1);
- /*THIS LINE for adding allocated seats to binary file*/                           writeToRandomAccessFileAtPosition(filename, 1, allocatedCustomer.getAge());
                             break;
                         } else if (seatingPlan[i][7] == "*"){
                             seatingPlan[i][7] = allocatedCustomer.getAge();
@@ -253,6 +252,7 @@ public class Assessment2DArray {
                 break;
         }
         allocatedCustomer.setId(idCounter);
+        /*THIS LINE for adding allocated seats to binary file*/                           writeToRandomAccessFileAtPosition(filename, 1, allocatedCustomer.getAge());
         System.out.println("Your seat has been booked. The Id assigned to you is " + allocatedCustomer.getId());
     }
     
