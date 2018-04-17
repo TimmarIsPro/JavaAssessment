@@ -29,10 +29,10 @@ public class Customer implements Comparable {
             seatColumn = cSeatColumn;
         }
         
-        public int compareTo(Object o) {
-            Customer c = (Customer) o;
-            return this.name.compareTo(c.name);
-        }
+     /*   public static int compare(Customer a, Customer b)
+        {
+            return a.getName().compareTo(b.getName());
+        }*/
         
         public int getId() {
             return id;
@@ -87,8 +87,8 @@ public class Customer implements Comparable {
 
     public void setSeatColumn(int seatColumn) {
         this.seatColumn = seatColumn;
-    }
-
+    }   
+    
         public String toString() {
             String details = "";
             
@@ -96,6 +96,41 @@ public class Customer implements Comparable {
             
             return details;
         }
+
+    @Override
+    public int compareTo(Object o) {     
+        if (o == null){
+            return 1;
+        }
+        if (this.name==null) {
+            return -1;
+        }
         
+        Customer c = (Customer) o; 
+       
+        int result = nullSafeStringComparator(this.name, c.name);
+        //if (result != 0) {
+            return result;
+        //}
+        //return nullSafeStringComparator(this.age, c.age);        
+    }
+
+    public static int nullSafeStringComparator(final String one, final String two) {
+        if (one == null ^ two == null) {
+            return (one == null) ? -1 : 1;
+        }
+        if (one == null && two == null) {
+            return 0;
+        }
+        return one.compareToIgnoreCase(two);
+    }
+
+
+       
+
+  
+
+
+       
       
 }

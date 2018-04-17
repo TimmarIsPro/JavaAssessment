@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package assessment2darray;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.*;
+import java.io.RandomAccessFile;
 
 /**
  *
@@ -18,6 +20,7 @@ public class Assessment2DArray {
     static String seatingPlan[][] = new String[13][8];
     static Customer customers[] = new Customer[75]; //maximum number of seats plus some leeway i guess
     static int idCounter = 1; //Might be necessary for now
+    String filename = "SeatingPlan.dat"; //Seating plan binary file.
             
     public void displaySeats() { 
         
@@ -29,6 +32,29 @@ public class Assessment2DArray {
             System.out.println();
         }
         System.out.println();
+    }
+    
+    private static void writeToRandomAccessFile(String file, String record){
+        try {
+            RandomAccessFile fileStore = new RandomAccessFile(file, "rw");
+            long position = fileStore.length();
+            fileStore.seek(position);
+            fileStore.writeUTF(record);
+            fileStore.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private static void writeToRandomAccessFileAtPosition(String file, int position, String record){
+        try {
+            RandomAccessFile fileStore = new RandomAccessFile(file, "rw");
+            fileStore.seek(position);
+            fileStore.writeUTF(record);
+            fileStore.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     public void initializeSeatingPlan() {
@@ -53,7 +79,18 @@ public class Assessment2DArray {
         }
         for (int i = 1; i < 13; i++){
             seatingPlan[i][4] = (" ");
-        }        
+        }
+
+
+        for (int i = 1; i < seatingPlan.length; i++){
+            for (int j = 1; j < seatingPlan[i].length; j++)
+            {
+                writeToRandomAccessFile(filename,seatingPlan[i][j]);
+                
+            }    
+        } 
+        //thing to test if binary file is working right
+        //writeToRandomAccessFileAtPosition(filename, 2 , "9");
     }
     
     public void checkSeating(int rowNum, int colNum) {
@@ -83,6 +120,7 @@ public class Assessment2DArray {
                             seatingPlan[i][1] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(1);
+ /*THIS LINE for adding allocated seats to binary file*/                           writeToRandomAccessFileAtPosition(filename, 1, allocatedCustomer.getAge());
                             break;
                         } else if (seatingPlan[i][7] == "*"){
                             seatingPlan[i][7] = allocatedCustomer.getAge();
@@ -210,7 +248,7 @@ public class Assessment2DArray {
                         }
                     }
                 }
-                break;            
+                break; 
             default:
                 break;
         }
@@ -244,15 +282,29 @@ public class Assessment2DArray {
         }
     }
     
-    public void sortCustomers() {
-        for (int i = 1; i < idCounter; i++) {
+    public void searchCustomers() {
+   /*     for (int i = 1; i < idCounter; i++) {
             Customer customer = customers[i];
             //System.out.println(customer);
-        }
+        }*/
         System.out.println("Enter the name to search for: ");
         String toSearch = console.next();
-        int first = 0;
+       
+        
+        
+        Arrays.sort(customers);
+        
+        for (int i = 0; i < idCounter; i++)
+        {
+            Customer customer = customers[i];
+            System.out.println(customers[i].getName());
+        }
+
+        
+        
+        int first = 1;
         int last = idCounter - 1;
+
         int mid = 0;
         
         boolean found = false;
@@ -312,7 +364,7 @@ public class Assessment2DArray {
                 case "search" :
                     //stuff in here should take in a copy of the customers array, sort it in alphabetical order, then
                     //search it for a specific name
-                    arrayApp.sortCustomers();
+                    arrayApp.searchCustomers();
                     break;
                 case "delete":
                     //method to delete an existing customer booking
