@@ -330,24 +330,39 @@ public class Assessment2DArray {
        
         
         
-        Arrays.sort(customers);
+        //Arrays.sort(customers);        
+        Arrays.sort(customers, new Comparator<Object>() {
+       @Override
+       public int compare(Object o1, Object o2) {
+           if (o1 == null && o2 == null) {
+               return 0;
+           }
+           if (o1 == null) {
+               return 1;
+           }
+           if (o2 == null) {
+               return -1;
+           }
+           Customer c1 = (Customer)o1;
+           Customer c2 = (Customer)o2;
+           return c1.getName().compareTo(c2.getName());
+       }});        
         
-        for (int i = 0; i < idCounter; i++)
+        for (int i = 0; i < idCounter - 1; i++)
         {
             Customer customer = customers[i];
             System.out.println(customers[i].getName());
-        }
-
+        }        
         
-        
-        int first = 1;
+        int first = 0;
         int last = idCounter - 1;
 
         int mid = 0;
         
         boolean found = false;
-        
-        while (first <= last) {
+
+        try {
+            while (first <= last) {
             mid = (first + last) / 2;
             //this here might need to be modified
             if (customers[mid].getName().compareTo(toSearch) < 0 ) {
@@ -356,10 +371,16 @@ public class Assessment2DArray {
                 last = mid - 1;
             } else {
                 found = true;
+                first = last + 1;
             }
         }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }        
         if (found) {
             System.out.println(customers[mid].toString());
+        } else {
+            System.out.println("Customer not found.");
         }
         
     }
