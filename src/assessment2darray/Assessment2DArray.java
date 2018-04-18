@@ -57,6 +57,14 @@ public class Assessment2DArray {
         }
     }
     
+    private static int obtainRandomAccessFilePosition()
+    {
+        int result = 0;
+        
+        
+        return result;
+    }
+    
     public void initializeSeatingPlan() {
         
         //if time permits, make this look more proper
@@ -84,10 +92,17 @@ public class Assessment2DArray {
 
         for (int i = 1; i < seatingPlan.length; i++){
             for (int j = 1; j < seatingPlan[i].length; j++)
-            {
+         /*   {
                 writeToRandomAccessFile(filename,seatingPlan[i][j]);
                 
-            }    
+            }    */
+            {
+                if (seatingPlan[i][j] == "*")
+                {
+                    int location = Integer.parseInt("" + i + "" + j);                    
+                    writeToRandomAccessFileAtPosition(filename, location, seatingPlan[i][j]);
+                }
+            }   
         } 
         //thing to test if binary file is working right
         //writeToRandomAccessFileAtPosition(filename, 2 , "9");
@@ -111,6 +126,12 @@ public class Assessment2DArray {
         }
     }
     
+    public int obtainFileLocation(int posA, int posB)
+    {
+        int location = Integer.parseInt("" + posA + "" + posB);
+        return location;
+    }
+    
     public void allocateCustomer(Customer allocatedCustomer) {
         switch(allocatedCustomer.getClassType()) {
             case "F":
@@ -120,11 +141,13 @@ public class Assessment2DArray {
                             seatingPlan[i][1] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(1);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 1), seatingPlan[i][1]);
                             break;
                         } else if (seatingPlan[i][7] == "*"){
                             seatingPlan[i][7] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(7);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 7), seatingPlan[i][7]);
                             break;
                         }
                     }
@@ -133,12 +156,14 @@ public class Assessment2DArray {
                         if (seatingPlan[i][2] == "*") {
                             seatingPlan[i][2] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(1);
+                            allocatedCustomer.setSeatColumn(2);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 2), seatingPlan[i][2]);
                             break;
                         } else if (seatingPlan[i][6] == "*") {
                             seatingPlan[i][6] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(2);
+                            allocatedCustomer.setSeatColumn(6);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 6), seatingPlan[i][6]);
                             break;
                         }
                     }
@@ -147,12 +172,14 @@ public class Assessment2DArray {
                         if (seatingPlan[i][3] == "*") {
                             seatingPlan[i][3] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(1);
+                            allocatedCustomer.setSeatColumn(3);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 3), seatingPlan[i][3]);
                             break;
                         } else if (seatingPlan[i][5] == "*") {
                             seatingPlan[i][5] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(2);
+                            allocatedCustomer.setSeatColumn(5);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 5), seatingPlan[i][5]);
                             break;
                         }
                     }
@@ -165,11 +192,13 @@ public class Assessment2DArray {
                             seatingPlan[i][1] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(1);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 1), seatingPlan[i][1]);
                             break;
                         } else if (seatingPlan[i][7] == "*"){
                             seatingPlan[i][7] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(7);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 7), seatingPlan[i][7]);
                             break;
                         }
                     }
@@ -178,12 +207,14 @@ public class Assessment2DArray {
                         if (seatingPlan[i][2] == "*") {
                             seatingPlan[i][2] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(1);
+                            allocatedCustomer.setSeatColumn(2);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 2), seatingPlan[i][2]);
                             break;
                         } else if (seatingPlan[i][6] == "*") {
                             seatingPlan[i][6] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(2);
+                            allocatedCustomer.setSeatColumn(6);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 6), seatingPlan[i][6]);
                             break;
                         }
                     }
@@ -192,12 +223,14 @@ public class Assessment2DArray {
                         if (seatingPlan[i][3] == "*") {
                             seatingPlan[i][3] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(1);
+                            allocatedCustomer.setSeatColumn(3);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 3), seatingPlan[i][3]);
                             break;
                         } else if (seatingPlan[i][5] == "*") {
                             seatingPlan[i][5] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(2);
+                            allocatedCustomer.setSeatColumn(5);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 5), seatingPlan[i][5]);
                             break;
                         }
                     }
@@ -210,11 +243,13 @@ public class Assessment2DArray {
                             seatingPlan[i][1] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(1);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 1), seatingPlan[i][1]);
                             break;
                         } else if (seatingPlan[i][7] == "*"){
                             seatingPlan[i][7] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i) ;
                             allocatedCustomer.setSeatColumn(7);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 7), seatingPlan[i][7]);
                             break;
                         }
                     }
@@ -223,12 +258,14 @@ public class Assessment2DArray {
                         if (seatingPlan[i][2] == "*") {
                             seatingPlan[i][2] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(1);
+                            allocatedCustomer.setSeatColumn(2);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 2), seatingPlan[i][2]);
                             break;
                         } else if (seatingPlan[i][6] == "*") {
                             seatingPlan[i][6] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(2);
+                            allocatedCustomer.setSeatColumn(6);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 6), seatingPlan[i][6]);
                             break;
                         }
                     }
@@ -237,12 +274,14 @@ public class Assessment2DArray {
                         if (seatingPlan[i][3] == "*") {
                             seatingPlan[i][3] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(1);
+                            allocatedCustomer.setSeatColumn(3);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 3), seatingPlan[i][3]);
                             break;
                         } else if (seatingPlan[i][5] == "*") {
                             seatingPlan[i][5] = allocatedCustomer.getAge();
                             allocatedCustomer.setSeatRow(i);
-                            allocatedCustomer.setSeatColumn(2);
+                            allocatedCustomer.setSeatColumn(5);
+                            writeToRandomAccessFileAtPosition(filename, obtainFileLocation(i, 5), seatingPlan[i][5]);
                             break;
                         }
                     }
@@ -252,7 +291,6 @@ public class Assessment2DArray {
                 break;
         }
         allocatedCustomer.setId(idCounter);
-        /*THIS LINE for adding allocated seats to binary file*/                           writeToRandomAccessFileAtPosition(filename, 1, allocatedCustomer.getAge());
         System.out.println("Your seat has been booked. The Id assigned to you is " + allocatedCustomer.getId());
     }
     
@@ -292,24 +330,39 @@ public class Assessment2DArray {
        
         
         
-        Arrays.sort(customers);
+        //Arrays.sort(customers);        
+        Arrays.sort(customers, new Comparator<Object>() {
+       @Override
+       public int compare(Object o1, Object o2) {
+           if (o1 == null && o2 == null) {
+               return 0;
+           }
+           if (o1 == null) {
+               return 1;
+           }
+           if (o2 == null) {
+               return -1;
+           }
+           Customer c1 = (Customer)o1;
+           Customer c2 = (Customer)o2;
+           return c1.getName().compareTo(c2.getName());
+       }});        
         
-        for (int i = 0; i < idCounter; i++)
+        for (int i = 0; i < idCounter - 1; i++)
         {
             Customer customer = customers[i];
             System.out.println(customers[i].getName());
-        }
-
+        }        
         
-        
-        int first = 1;
+        int first = 0;
         int last = idCounter - 1;
 
         int mid = 0;
         
         boolean found = false;
-        
-        while (first <= last) {
+
+        try {
+            while (first <= last) {
             mid = (first + last) / 2;
             //this here might need to be modified
             if (customers[mid].getName().compareTo(toSearch) < 0 ) {
@@ -318,10 +371,16 @@ public class Assessment2DArray {
                 last = mid - 1;
             } else {
                 found = true;
+                first = last + 1;
             }
         }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }        
         if (found) {
             System.out.println(customers[mid].toString());
+        } else {
+            System.out.println("Customer not found.");
         }
         
     }
